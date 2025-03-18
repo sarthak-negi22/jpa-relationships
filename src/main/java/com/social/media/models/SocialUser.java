@@ -1,24 +1,27 @@
 package com.social.media.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class SocialUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(mappedBy = "user")
     @JoinColumn(name = "social_profile_id")     // Only used in the "owning" entity, since SocialUser owns the relationship
     private SocialProfile socialProfile;
 
-    @OneToMany
+    @OneToMany(mappedBy =  "socialUser")
     private List<SocialPost> socialPosts = new ArrayList<>();
 
     @ManyToMany
@@ -28,6 +31,11 @@ public class SocialUser {
             inverseJoinColumns = @JoinColumn(name = "group_id") // SocialGroup
     )      // holds the foreign keys of both related entities
     private Set<SocialGroup> socialGroups = new HashSet<>();
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
 
 // By default, in one to many mapping, JPA maps using a FK in the child(many) table, but if needed, we can have a separate join table using @JoinTable
