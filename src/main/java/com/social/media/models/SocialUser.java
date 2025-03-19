@@ -1,5 +1,6 @@
 package com.social.media.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,8 @@ public class SocialUser {
     private Long id;
 
     @OneToOne(mappedBy = "user")
-    @JoinColumn(name = "social_profile_id")     // Only used in the "owning" entity, since SocialUser owns the relationship
+//    @JoinColumn(name = "social_profile_id")     // Only used in the "owning" entity, since SocialUser owns the relationship
+
     private SocialProfile socialProfile;
 
     @OneToMany(mappedBy =  "socialUser")
@@ -30,6 +32,7 @@ public class SocialUser {
             joinColumns = @JoinColumn(name = "user_id"),    // SocialUser
             inverseJoinColumns = @JoinColumn(name = "group_id") // SocialGroup
     )      // holds the foreign keys of both related entities
+
     private Set<SocialGroup> socialGroups = new HashSet<>();
 
     @Override

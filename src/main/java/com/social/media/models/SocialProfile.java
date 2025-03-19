@@ -1,5 +1,6 @@
 package com.social.media.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,5 +19,7 @@ public class SocialProfile {
 //    mappedBy defines, that socialProfile field, which is defined in the SocialUser, its managed by SocialUser only. That means SocialProfile is not owning entity, and it makes use of "mappedBy", hence JPA doesnt create a FK column
     @OneToOne()       // defined one-to-one relationship
     @JoinColumn(name = "social_user")       // defines the foreign key column in the owning entity with a specified column name, to have a better control over it
+    @JsonIgnore
+    // excludes the field from serialization and deserialization when working with JSON, to avoid infinite circular references
     private SocialUser user;
 }
