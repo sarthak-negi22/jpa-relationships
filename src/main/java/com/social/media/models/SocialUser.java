@@ -18,13 +18,13 @@ public class SocialUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    cascade specifies, that when we will be doing any operation with socialProfile along with SocialUser, the profile will be impacted as well. Persist means, only child entities are saved when parent is saved. Merge means about "updated". Delete means, the child entity is also deleted when parent's entity is deleted
-    @OneToOne(mappedBy = "user", cascade ={CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
+//    cascade specifies, that when we will be doing any operation with socialProfile along with SocialUser, the profile will be impacted as well. Persist means, only child entities are saved when parent is saved. Merge means about "updated". Delete means, the child entity is also deleted when parent's entity is deleted.
+    @OneToOne(mappedBy = "user", cascade ={CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})     // multiple cascading types can happen for a single association
 //    @JoinColumn(name = "social_profile_id")     // Only used in the "owning" entity, since SocialUser owns the relationship
 
     private SocialProfile socialProfile;
 
-    @OneToMany(mappedBy =  "socialUser")
+    @OneToMany(mappedBy =  "socialUser", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<SocialPost> socialPosts = new ArrayList<>();
 
     @ManyToMany
