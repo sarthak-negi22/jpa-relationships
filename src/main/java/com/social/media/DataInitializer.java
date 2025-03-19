@@ -59,8 +59,6 @@ public class DataInitializer {
             userRepository.save(user2);
             userRepository.save(user3);
 
-
-
             SocialPost post1 = new SocialPost();
             SocialPost post2 = new SocialPost();
             SocialPost post3 = new SocialPost();
@@ -84,6 +82,11 @@ public class DataInitializer {
             socialProfileRepository.save(profile1);
             socialProfileRepository.save(profile2);
             socialProfileRepository.save(profile3);
+
+//            fetch types - determines how related entities are loaded from the database when an entity is retrieved.
+
+            System.out.println("Fetching social user!!");
+            userRepository.findById(1L);
         };
     }
 }

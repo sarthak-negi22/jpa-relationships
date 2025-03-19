@@ -27,7 +27,7 @@ public class SocialUser {
     @OneToMany(mappedBy =  "socialUser", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<SocialPost> socialPosts = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)        // means the related entities will be loaded up immediately when parent entity is called, Default fetch type of many to many is lazy, like in one to many. But default fetch types of many to one and one to one is eager. "Eager" is used only when its needed, else it can have performance issues.
     @JoinTable(
             name = "user_group",
             joinColumns = @JoinColumn(name = "user_id"),    // SocialUser
