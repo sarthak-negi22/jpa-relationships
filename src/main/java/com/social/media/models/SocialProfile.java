@@ -22,4 +22,10 @@ public class SocialProfile {
     @JsonIgnore
     // excludes the field from serialization and deserialization when working with JSON, to avoid infinite circular references
     private SocialUser user;
+
+    private String description;
 }
+
+
+// cascading means, when we want to perform one operation on one entity, that operation is propagated to other entities related to it.
+// Hibernate provides types for each operations like persist, merge, remove, refresh, detach to specify how they propagate from a parent entity to a child entities
