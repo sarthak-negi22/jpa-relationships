@@ -24,6 +24,13 @@ public class SocialProfile {
     private SocialUser user;
 
     private String description;
+
+//    created custom setters on both side of one to one mapping, to ensure cascading is working as intended, as lombok generates only simple boilerplate code, this ensures that relationship is established both sides.
+    public void setSocialUser(SocialUser socialUser) {
+        this.user = socialUser;
+        if(user.getSocialProfile() != this)
+            user.setSocialProfile(this);
+    }
 }
 
 

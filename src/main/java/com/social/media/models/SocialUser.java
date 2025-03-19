@@ -18,7 +18,8 @@ public class SocialUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "user")
+//    cascade specifies, that when we will be doing any operation with socialProfile along with SocialUser, the profile will be impacted as well
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 //    @JoinColumn(name = "social_profile_id")     // Only used in the "owning" entity, since SocialUser owns the relationship
 
     private SocialProfile socialProfile;
@@ -38,6 +39,11 @@ public class SocialUser {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public void setSocialProfile(SocialProfile socialProfile) {
+        socialProfile.setUser(this);
+        this.socialProfile = socialProfile;
     }
 }
 
