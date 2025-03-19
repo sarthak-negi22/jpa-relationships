@@ -32,7 +32,7 @@ public class SocialUser {
             name = "user_group",
             joinColumns = @JoinColumn(name = "user_id"),    // SocialUser
             inverseJoinColumns = @JoinColumn(name = "group_id") // SocialGroup
-    )      // holds the foreign keys of both related entities
+    )      // holds the foreign keys of both related  entities
 
     private Set<SocialGroup> socialGroups = new HashSet<>();
 
